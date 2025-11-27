@@ -1,4 +1,4 @@
-using Microsoft.Win32.SafeHandles;
+
 using UnityEngine;
 
 namespace FPS.InGame.Scripts.Player
