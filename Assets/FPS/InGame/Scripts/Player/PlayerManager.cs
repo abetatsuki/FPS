@@ -26,8 +26,15 @@ namespace FPS.InGame.Scripts.Player
         private Vector2 _moveInput = Vector2.zero;
         private void Awake()
         {
-           Init();
-           InputEventRegister();
+            Init();
+        }
+        private void OnEnable()
+        {
+            InputEventRegister();
+        }
+        private void OnDisable()
+        {
+            InputEventUnRegister();
         }
 
         private void Update()
@@ -44,8 +51,8 @@ namespace FPS.InGame.Scripts.Player
 
         private void CreatePure()
         {
-            _playerLook = new PlayerLook(this.transform,_camera.transform);
-            _playerMove = new PlayerMove(_rb,_camera.transform);
+            _playerLook = new PlayerLook(this.transform, _camera.transform);
+            _playerMove = new PlayerMove(_rb, _camera.transform);
             _inputBuffer = new InputBuffer(_playerinput);
         }
 
@@ -53,11 +60,19 @@ namespace FPS.InGame.Scripts.Player
         {
             _inputBuffer.Init();
         }
-
         private void InputEventRegister()
         {
             _inputBuffer.MoveAction.Performed += _playerMove.InputMove;
+            _inputBuffer.MoveAction.Canceled += _playerMove.InputMove;
+            _inputBuffer.LookAction.Performed += _playerLook.InputOnLook;
         }
+        private void InputEventUnRegister()
+        {
+            _inputBuffer.MoveAction.Performed -= _playerMove.InputMove;
+            _inputBuffer.MoveAction.Canceled -= _playerMove.InputMove;
+            _inputBuffer.LookAction.Performed -= _playerLook.InputOnLook;
+        }
+
 
     }
 }
