@@ -19,7 +19,6 @@ namespace FPS.InGame.Scripts.Player
         {
             GetComponent();
             Init();
-            SetEvent();
         }
 
         private void Update()
@@ -36,22 +35,11 @@ namespace FPS.InGame.Scripts.Player
 
         private void Init()
         {
-            _inputBuffer = new InputBuffer(_playerinput);
             _playerLook = new PlayerLook(this.transform,_camera.transform);
             _playerMove = new PlayerMove(_rb,_camera.transform);
             
         }
 
-        private void SetEvent()
-        {
-            _inputBuffer.OnLook += _playerLook.InputOnLook;
-            _inputBuffer.OnMove += _playerMove.InputMove;
-        }
-
-        private void DisposeEvent()
-        {
-            _inputBuffer.OnLook -= _playerLook.InputOnLook;
-            _inputBuffer.OnMove -= _playerMove.InputMove;
-        }
+        
     }
 }
