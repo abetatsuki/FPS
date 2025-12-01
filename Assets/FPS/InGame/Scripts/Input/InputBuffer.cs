@@ -1,6 +1,5 @@
-using System;
+
 using UnityEngine;
-using UnityEngine.Android;
 using UnityEngine.InputSystem;
 
 namespace FPS.InGame.Scripts.Player
