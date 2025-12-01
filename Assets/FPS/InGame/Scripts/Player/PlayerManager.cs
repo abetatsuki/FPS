@@ -9,7 +9,8 @@ namespace FPS.InGame.Scripts.Player
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(CapsuleCollider))]
-    [RequireComponent(typeof(NavMeshAgent))]
+    //[RequireComponent(typeof(NavMeshAgent))]
+    [RequireComponent(typeof(Animator))]
     [DefaultExecutionOrder(-100)]
     public class PlayerManager : MonoBehaviour
     {
@@ -26,31 +27,39 @@ namespace FPS.InGame.Scripts.Player
         private InputBuffer _inputBuffer;
         private PlayerLook _playerLook;
         private PlayerMove _playerMove;
+        private Animator _animator;
 
-        private Vector2 _moveInput = Vector2.zero;
+        private float _currentSpeed;
+
+        private float _speed = 0f;
         private void Awake()
         {
             Init();
         }
+        private void Update()
+        {
+            _playerLook.ChangeLookDirection();
+            _playerMove.MoveRigidbody();
+            ParameterUpdate();
+            SetAnimation();
+        }
         private void OnEnable()
         {
             InputEventRegister();
+            PureCheck();
         }
         private void OnDisable()
         {
             InputEventUnRegister();
         }
 
-        private void Update()
-        {
-            _playerLook.ChangeLookDirection();
-            _playerMove.MoveRigidbody();
-        }
+
 
         private void GetComponent()
         {
             _playerinput = GetComponent<PlayerInput>();
             _rb = GetComponent<Rigidbody>();
+            _animator = GetComponent<Animator>();
         }
 
         private void CreatePure()
@@ -76,6 +85,60 @@ namespace FPS.InGame.Scripts.Player
             _inputBuffer.MoveAction.Canceled -= _playerMove.InputMove;
             _inputBuffer.LookAction.Performed -= _playerLook.InputOnLook;
         }
+        private void SetAnimation()
+        {
+            _animator.SetFloat("Speed", _currentSpeed);
+        }
+        private void ParameterUpdate()
+        {
+            _currentSpeed = _playerMove.CurrentSpeed;
+        }
+
+        private void PureCheck()
+        {
+            bool ok = true;
+
+            if (_playerinput == null)
+            {
+                Debug.LogError("PlayerManager.PureCheck: PlayerInput is null.");
+                ok = false;
+            }
+            if (_rb == null)
+            {
+                Debug.LogError("PlayerManager.PureCheck: Rigidbody is null.");
+                ok = false;
+            }
+            if (_inputBuffer == null)
+            {
+                Debug.LogError("PlayerManager.PureCheck: InputBuffer is null.");
+                ok = false;
+            }
+            if (_playerLook == null)
+            {
+                Debug.LogError("PlayerManager.PureCheck: PlayerLook is null.");
+                ok = false;
+            }
+            if (_playerMove == null)
+            {
+                Debug.LogError("PlayerManager.PureCheck: PlayerMove is null.");
+                ok = false;
+            }
+            if (_animator == null)
+            {
+                Debug.LogError("PlayerManager.PureCheck: Animator is null.");
+                ok = false;
+            }
+
+            if (!ok)
+            {
+                // ívñΩìIÇ»åáëπÇ™Ç†ÇÍÇŒñ≥å¯âªÇµÇƒà»ç~ÇÃéQè∆ÉGÉâÅ[ÇñhÇÆ
+                enabled = false;
+                return;
+            }
+
+        }
+
+        
 
 
     }
