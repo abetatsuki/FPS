@@ -9,7 +9,7 @@ namespace FPS.InGame.Scripts.Player
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(CapsuleCollider))]
-    //[RequireComponent(typeof(NavMeshAgent))]
+    [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(Animator))]
     [DefaultExecutionOrder(-100)]
     public class PlayerManager : MonoBehaviour
