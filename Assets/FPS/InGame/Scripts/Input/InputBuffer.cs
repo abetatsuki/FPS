@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 namespace FPS.InGame.Scripts.Player
 {
     ///<summary> 入力バッファクラス </summary>
-    [RequireComponent(typeof(PlayerInput)), DefaultExecutionOrder(-99)]
     public class InputBuffer
     {
         public InputBuffer(PlayerInput playerInput)
@@ -18,14 +17,9 @@ namespace FPS.InGame.Scripts.Player
         public InputActionEntity<float> JumpAction => _jumpActionEntity;
         public InputActionEntity<float> SprintAction => _sprintActionEntity;
 
-
-        [SerializeField]
         private const string _lookActionName = "Look";
-        [SerializeField]
         private const string _moveActionName = "Move";
-        [SerializeField]
         private const string _jumpActionName = "Jump";
-        [SerializeField]
         private const string _sprintActionName = "Sprint";
 
         private PlayerInput _playerInput;
@@ -35,8 +29,8 @@ namespace FPS.InGame.Scripts.Player
         private InputActionEntity<float> _jumpActionEntity;
         private InputActionEntity<float> _sprintActionEntity;
 
-
-        private void Awake()
+        ///<summary> 初期化 </summary>
+        public void Init()
         {
             if (_playerInput != null)
             {
