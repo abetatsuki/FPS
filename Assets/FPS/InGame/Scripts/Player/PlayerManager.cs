@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 namespace FPS.InGame.Scripts.Player
@@ -7,6 +8,8 @@ namespace FPS.InGame.Scripts.Player
     /// <summary> プレイヤーマネージャー </summary>
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(CapsuleCollider))]
+    [RequireComponent(typeof(NavMeshAgent))]
     [DefaultExecutionOrder(-100)]
     public class PlayerManager : MonoBehaviour
     {
