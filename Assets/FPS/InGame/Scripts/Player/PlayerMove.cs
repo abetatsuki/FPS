@@ -10,7 +10,7 @@ namespace FPS.InGame.Scripts.Player
             _rb = rigidbody;
             _cameraTransform = camera;
         }
-
+        public float CurrentSpeed => _currentSpeed;
         public void InputMove(Vector2 input)
         {
            _moveInput = new Vector3(input.x, 0, input.y);
@@ -35,6 +35,8 @@ namespace FPS.InGame.Scripts.Player
 
             _rb.linearVelocity = new Vector3(_horizontalVelocity.x,
                 _velocity.y, _horizontalVelocity.z);
+
+            _currentSpeed = _horizontalVelocity.magnitude;
         }
         
         private Rigidbody _rb;
@@ -49,5 +51,6 @@ namespace FPS.InGame.Scripts.Player
         private Vector3  _moveDir = Vector3.zero;
         
         private float _moveSpeed = 3f;
+        private float _currentSpeed = 0f;
     }
 }
