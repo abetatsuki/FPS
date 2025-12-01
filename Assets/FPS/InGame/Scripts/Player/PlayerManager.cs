@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace FPS.InGame.Scripts.Player
 {
+    /// <summary> プレイヤーマネージャー </summary>
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(Rigidbody))]
     [DefaultExecutionOrder(-100)]
