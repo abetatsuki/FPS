@@ -9,16 +9,25 @@ namespace FPS.InGame.Scripts.Player
     [DefaultExecutionOrder(-100)]
     public class PlayerManager : MonoBehaviour
     {
+        public void Init()
+        {
+            GetComponent();
+            CreatePure();
+            InitPure();
+        }
+
         [SerializeField] private GameObject _camera;
         private PlayerInput _playerinput;
         private Rigidbody _rb;
         private InputBuffer _inputBuffer;
         private PlayerLook _playerLook;
         private PlayerMove _playerMove;
+
+        private Vector2 _moveInput = Vector2.zero;
         private void Awake()
         {
-            GetComponent();
-            Init();
+           Init();
+           InputEventRegister();
         }
 
         private void Update()
@@ -33,13 +42,22 @@ namespace FPS.InGame.Scripts.Player
             _rb = GetComponent<Rigidbody>();
         }
 
-        private void Init()
+        private void CreatePure()
         {
             _playerLook = new PlayerLook(this.transform,_camera.transform);
             _playerMove = new PlayerMove(_rb,_camera.transform);
-            
+            _inputBuffer = new InputBuffer(_playerinput);
         }
 
-        
+        private void InitPure()
+        {
+            _inputBuffer.Init();
+        }
+
+        private void InputEventRegister()
+        {
+            _inputBuffer.MoveAction.Performed += _playerMove.InputMove;
+        }
+
     }
 }
