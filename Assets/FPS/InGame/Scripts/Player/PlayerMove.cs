@@ -11,10 +11,9 @@ namespace FPS.InGame.Scripts.Player
             _cameraTransform = camera;
         }
 
-        public void InputMove(Vector2 move)
+        public void InputMove(Vector2 input)
         {
-            _moveInput.x = move.x;
-            _moveInput.z = move.y;
+           _moveInput = new Vector3(input.x, 0, input.y);
         }
 
         public void MoveRigidbody()
