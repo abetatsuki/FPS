@@ -8,7 +8,7 @@ public class PlayerCon : MonoBehaviour
     private IMovarable _mover;
     private IInputrable _inputrable;
     private ILookrable _lookrable;
-
+ 
     [SerializeField] private Transform _cameraRoot;
     [SerializeField] private float _speed = 10f;
     private void Awake()
@@ -20,8 +20,6 @@ public class PlayerCon : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_inputrable.LookInput);
-        Debug.Log(_inputrable.MoveInput);
         _lookrable.ChangeLook(_inputrable.LookInput);
         _mover.Move(_inputrable.MoveInput);
     }
