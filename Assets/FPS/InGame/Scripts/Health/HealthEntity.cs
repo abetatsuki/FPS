@@ -1,4 +1,5 @@
 using System;
+using UniRx; 
 //// <summary> ‘Ì—ÍŠÇ—ƒNƒ‰ƒX </summary>
 public class HealthEntity : IHealth
 {
@@ -10,7 +11,6 @@ public class HealthEntity : IHealth
     }
 
     public event Action OnDeath;
-
     public event Action<int, int> OnHealthChanged;
     public int MaxHealth { get; private set; }
     public int CurrentHealth { get; private set; }
