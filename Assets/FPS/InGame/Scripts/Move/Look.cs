@@ -14,7 +14,7 @@ public class Look : ILookrable
     {
         (_yaw,_pitch) = LookCalculator.CalculatorLook(LookInput, _speed, Time.deltaTime, _maxDt,_yaw,_pitch);
         _me.rotation = Quaternion.Euler(0f, _yaw, 0f);
-        _camera.localRotation = Quaternion.Euler(_pitch, _yaw, 0f);
+        _camera.localRotation = Quaternion.Euler(_pitch, 0f, 0f);
     }
 
     private float _speed = 5f;
