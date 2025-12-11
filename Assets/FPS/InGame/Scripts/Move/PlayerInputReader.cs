@@ -8,7 +8,8 @@ public class PlayerInputReader : IInputrable
     private InputBuffer _inputBuffer;
     private PlayerInput _playerInput;
     public Vector3 MoveInput { get; private set; }
-    public Vector3 LookInput { get; private set; } 
+    public Vector3 LookInput { get; private set; }
+    public float JumpInput { get; private set; }
 
     public PlayerInputReader(PlayerInput playerInput)
     {
@@ -21,8 +22,12 @@ public class PlayerInputReader : IInputrable
         _inputBuffer.Init();
         _inputBuffer.MoveAction.Performed += InputMove;
         _inputBuffer.MoveAction.Canceled += InputMove;
-        _inputBuffer.LookAction.Started += InputLook;
+        _inputBuffer.LookAction.Performed += InputLook;
         _inputBuffer.LookAction.Canceled += InputLook;
+        _inputBuffer.JumpAction.Performed += InputJump;
+        _inputBuffer.JumpAction.Canceled += InputJump;
+
+
     }
     public void InputMove(Vector2 input)
     {
@@ -32,5 +37,9 @@ public class PlayerInputReader : IInputrable
     public void InputLook(Vector2 input)
     {
         LookInput = input;
+    }
+    public void InputJump(float jump)
+    {
+        JumpInput = jump;
     }
 }
