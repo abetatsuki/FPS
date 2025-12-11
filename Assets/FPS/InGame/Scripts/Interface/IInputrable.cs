@@ -6,5 +6,6 @@ namespace Assets.FPS.InGame.Scripts.Interface
     {
         Vector3 MoveInput { get; }
         Vector3 LookInput { get; }
+        float JumpInput { get; }
     }
 }
