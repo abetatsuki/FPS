@@ -8,7 +8,7 @@ public class AnimationCon
     }
     public void SetAnimation(float speed)
     {
-      _anim.SetFloat("Speed",speed);
+      _anim.SetFloat("Speed",speed,0.1f,Time.deltaTime);
     }
     private Animator _anim;
 }
